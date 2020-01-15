@@ -1,0 +1,8 @@
+<h1><%= @employee.name %></h1>
+
+<p><%= link_to "Edit", edit_employee_path(@employee) %></p>
+<p><%= link_to "Delete", employee_path(@employee),
+                         :data => {:confirm => "You sure?",
+                                   :method => "delete"} %></p>
+
+<p><%= link_to "Return to employees", employees_path %></p>
