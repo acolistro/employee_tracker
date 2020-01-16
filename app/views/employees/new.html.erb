@@ -1,7 +1,10 @@
 <h1>New employee</h1>
 
-<%= form_for @employee do |f| %>
+<%= form_for [@division, @employee] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+
   <%= f.submit  %>
 <% end %>
+
+<p><%= link_to "Return to divisions", divisions_path %></p>
