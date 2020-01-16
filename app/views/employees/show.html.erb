@@ -6,3 +6,9 @@
                                    :method => "delete"} %></p>
 
 <p><%= link_to "Return to employees", employees_path %></p>
+<%= @division.name %>
+<ul>
+  <% @projects.each do |project| %>
+  <li> <%= project.name %> </li>
+  <% end %>
+</ul>

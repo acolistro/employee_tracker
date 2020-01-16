@@ -6,33 +6,31 @@ class EmployeesController < ApplicationController
   end
 
   def new
-    @division = Division.find(params[:division_id])
-    @employee = @division.employees.new
+    @employee = Employee.new
     @divisions = Division.all
     render :new
   end
 
   def create
-    @divisions = Division.all
-    @division = Division.find(params[:division_id])
-    @employee = @division.employees.new(employee_params)
-    binding.pry
+    @employee = Employee.new(employee_params)
+    # binding.pry
     if @employee.save
-      redirect_to division_path(@division)
+      redirect_to division_path(@employee.division)
     else
       render :new
     end
   end
 
   def edit
-    @division = Division.find(params[:division_id])
     @employee = Employee.find(params[:id])
+    @division = @employee.division
     render :edit
   end
 
   def show
-    @division = Division.find(params[:division_id])
     @employee = Employee.find(params[:id])
+    @division = @employee.division
+    @projects = @employee.projects
     render :show
   end
 
@@ -48,7 +46,7 @@ class EmployeesController < ApplicationController
   def destroy
     @employee = Employee.find(params[:id])
     @employee.destroy
-    redirect_to division_path(@employee.division)
+    redirect_to divisions_path(@division)
   end
 
   private

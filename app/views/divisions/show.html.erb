@@ -10,7 +10,7 @@
   <p>There are no employees yet.</p>
 <% end %>
 
-<p><%= link_to "Add an employee", new_division_employee_path(@division) %></p>
+<p><%= link_to "Add an employee", new_employee_path(@division) %></p>
 <p><%= link_to "Edit", edit_division_path(@division) %></p>
 <p><%= link_to "Delete", division_path(@division),
                          :data => {:confirm => "You sure?",

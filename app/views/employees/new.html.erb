@@ -3,7 +3,7 @@
 <%= form_for [@division, @employee] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-
+  <%= f.collection_select(:division_id, Division.all, :id, :name) %>
   <%= f.submit  %>
 <% end %>
 

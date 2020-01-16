@@ -26,7 +26,7 @@ class DivisionsController < ApplicationController
 
   def show
     @division = Division.find(params[:id])
-      # @employees = Employee.find(params[:division_id])
+    # @employee = Employee.find(params[:division_id])
     render :show
   end
 
