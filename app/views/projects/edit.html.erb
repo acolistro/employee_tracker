@@ -3,5 +3,13 @@
 <%= form_for @project do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+
+  <label for="employee_id">Add an employee to this project</label>
+  <select name="employee_id">
+    <% @employees.each do |employee| %>
+    <option value="<%= employee.id %>"><%= employee.name %></option>
+    <% end %>
+  </select>
+
   <%= f.submit  %>
 <% end %>

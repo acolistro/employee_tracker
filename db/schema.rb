@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2020_01_15_181552) do
   end
 
   create_table "employee_projects", id: false, force: :cascade do |t|
-    t.integer "employee_id"
-    t.integer "project_id"
+    t.bigint "employee_id"
+    t.bigint "project_id"
     t.index ["employee_id"], name: "index_employee_projects_on_employee_id"
     t.index ["project_id"], name: "index_employee_projects_on_project_id"
   end
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_01_15_181552) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
+    t.integer "division_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

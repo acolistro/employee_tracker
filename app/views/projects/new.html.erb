@@ -3,5 +3,8 @@
 <%= form_for @project do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+  <%= f.collection_select(:division_id, Division.all, :id, :name) %>
   <%= f.submit  %>
 <% end %>
+
+<p><%= link_to "Return to divisions", divisions_path %></p>

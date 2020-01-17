@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+DB = PG.connect({:dbname => 'employee_tracker_development'})
 
   def index
     @employees = Employee.all
@@ -13,7 +14,6 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Employee.new(employee_params)
-    # binding.pry
     if @employee.save
       redirect_to division_path(@employee.division)
     else
@@ -24,6 +24,7 @@ class EmployeesController < ApplicationController
   def edit
     @employee = Employee.find(params[:id])
     @division = @employee.division
+    @projects = Project.all
     render :edit
   end
 
@@ -36,8 +37,24 @@ class EmployeesController < ApplicationController
 
   def update
     @employee = Employee.find(params[:id])
-    if @employee.update(employee_params)
-      redirect_to division_path(@employee.division)
+    @project = Project.find(params[:project_id])
+    @division = @employee.division
+    @projects = Project.all
+    # binding.pry
+    if @project
+      distinct_projects = DB.exec("SELECT DISTINCT project_id FROM employee_projects WHERE employee_id = #{@employee.id};")
+      distinct = true
+      distinct_projects.each do |distinct_project|
+        if distinct_project.first[1].to_i == @project.id.to_i
+          distinct = false
+        end
+      end
+      if distinct == true
+        @employee.projects << @project
+      end
+      redirect_to employee_path(@employee)
+    elsif @employee.update(employee_params)
+      redirect_to employees_path
     else
       render :edit
     end

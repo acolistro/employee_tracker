@@ -3,6 +3,13 @@
 <%= form_for @employee do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.collection_select(:division_id, Division.all, :id, :name) %>
+
+  <label for="project_id">Add an project for this employee</label>
+  <select name="project_id">
+    <% @projects.each do |project| %>
+    <option value="<%= project.id %>"><%= project.name %></option>
+    <% end %>
+  </select>
+
   <%= f.submit  %>
 <% end %>
